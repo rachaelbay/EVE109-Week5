@@ -171,17 +171,17 @@ data
     ## All sequences of same length: 965 
     ## 
     ## Labels:
-    ## No306
-    ## No0908S
-    ## No0912S
-    ## No0908S
+    ## No304
+    ## No1208S
+    ## No1114S
     ## No1007S
-    ## No305
+    ## No1208S
+    ## No0910S
     ## ...
     ## 
     ## Base composition:
     ##     a     c     g     t 
-    ## 0.306 0.261 0.126 0.306 
+    ## 0.306 0.262 0.126 0.306 
     ## (Total: 96.5 kb)
 
  
@@ -196,12 +196,12 @@ head(meta)
 ```
 
     ##     names   loc
-    ## 1   No306 south
-    ## 2 No0908S north
-    ## 3 No0912S south
-    ## 4 No0908S north
-    ## 5 No1007S north
-    ## 6   No305 south
+    ## 1   No304 south
+    ## 2 No1208S north
+    ## 3 No1114S north
+    ## 4 No1007S north
+    ## 5 No1208S south
+    ## 6 No0910S south
 
 NOTE: If we were doing this on real data, we would usually read in the populations from a spreadsheet. Here we just make them up to illustrate how the process works!
 
@@ -223,7 +223,7 @@ hap
     ## Haplotype labels and frequencies:
     ## 
     ##    I   II  III   IV    V   VI  VII VIII   IX    X   XI  XII XIII  XIV   XV 
-    ##    8   10    7    6    9   10    5    6    7    7    5   10    4    4    2
+    ##    3    7    6   10    4    4    7    8   10   11    6    7   10    4    3
 
  
 
@@ -236,11 +236,11 @@ head(hapInfo)
 
     ##   values ind
     ## 1      1   I
-    ## 2     10   I
-    ## 3     13   I
-    ## 4     27   I
-    ## 5     28   I
-    ## 6     42   I
+    ## 2     17   I
+    ## 3     83   I
+    ## 4      2  II
+    ## 5      5  II
+    ## 6     23  II
 
 This command is a bit complicated. Briefly, it takes a list of individuals for each haplotype, and makes a dataframe that tells you which individual has which haplotype. The tricky part is that it returns the *indexes* of the individuals, not their actual data. Let's change the column names to make more sense:
 
@@ -257,13 +257,13 @@ merged <- data.frame(cbind(hapInfo,meta[hapInfo$index,]))
 head(merged)
 ```
 
-    ##    index haplotype names   loc
-    ## 1      1         I No306 south
-    ## 10    10         I No306 south
-    ## 13    13         I No306 north
-    ## 27    27         I No306 north
-    ## 28    28         I No306 north
-    ## 42    42         I No306 north
+    ##    index haplotype   names   loc
+    ## 1      1         I   No304 south
+    ## 17    17         I   No304 south
+    ## 83    83         I   No304 south
+    ## 2      2        II No1208S north
+    ## 5      5        II No1208S south
+    ## 23    23        II No1208S north
 
  
 
@@ -293,12 +293,12 @@ head(pie)
 
     ##      
     ##       north south
-    ##   I       5     3
-    ##   II      7     3
-    ##   III     5     2
-    ##   IV      2     4
-    ##   V       4     5
-    ##   VI      6     4
+    ##   I       0     3
+    ##   II      6     1
+    ##   III     5     1
+    ##   IV      7     3
+    ##   V       1     3
+    ##   VI      2     2
 
 This table shows, for each haplotype, how many individuals come from the north and how many come from the south. Remember, this is completely made up data so we don't expect any pattern here. Now we can use this to color the circles in the haplotype network, including adding a legend:
 
@@ -320,7 +320,7 @@ For homework you will create a haplotype network using the mtDNA data from Cliff
 
 ### *Homework 5: Write a script that does the following:*
 
-#### 1. Read in the fasta file "mtDNA.fa" and the metadata file "metadata.csv"
+#### 1. Read in the fasta file "mtDNA.fa" and the metadata file "metadata.csv" (hint: to read the .fa file you will use the command read.dna with argument format="fasta")
 
 #### 2. Create a haplotype network (no colors)
 
